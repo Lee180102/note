@@ -1,0 +1,5 @@
+域对象：
+	page
+	request
+	session
+	context

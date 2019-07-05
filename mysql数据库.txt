@@ -1,0 +1,153 @@
+
+更改数据库表结构：
+	alter table 表名 modify 字段名 varchar(300) null comment '描述内容';
+
+
+
+
+
+
+
+mysql 数据库
+
+数据库
+	Oracle		主流，使用最多，商用
+	DB2
+	SqlServer
+	mysql
+	sqlite
+Mysql
+	*开源免费
+	*卖给Sun公司
+	*一年后，Orcle收购了Sun
+	*Mysql分为 	免费社区版
+				闭源收费版
+	*Mysql		未来有完全闭源的风险
+	*Mysql		创始人，有开发了一个MySQL分支，MariaDB，有些方面已经超过MySQL
+	*开源社区已经放弃支持MySQL。转为支持MariaDB
+**************************************
+Linux安装软件分为几种方式：
+	*rpm，下载rpm包，比较繁琐，依赖性比较强，装一个软件，可能依赖别的包，依赖关系繁琐；
+	*yum	在线安装，提供一个软件的全部依赖包，依赖关系全搞定。
+	*yum list 支持的软件列表，用|grep mysql
+		yum install mysql会转成MariaDB
+******************************************
+Mysql数据库安装
+	*安装MySQL社区版community
+	*安装MariaDB
+	*Linux 用yum安装MariaDB
+		yum -y install mariadb-server mariadb mariadb-devel 
+		用systemctl start mariadb启动
+*****************************************
+MySQL的基本使用
+	*登录MySQL服务器
+		mysql -h(参数，指定ip地址)localhost -P(端口)3306 -u(用户名) -p
+	*查看数据库列表
+		show databases;
+		show schema;
+			*)databases		数据库
+			*)schema		数据库中一组对象的集合，也就是数据库的意思
+	(DBA Database Administrator 数据库管理员)
+	*进入数据库
+	 	use test
+	 	use db1
+	 	use mysql
+	*查看数据库表
+		show tables
+	*查询表中的数据
+		select * from user；
+**************************************************
+数据库分类
+	*关系型数据库
+		*)用表储存数据，相关数据存入一张表
+	*非关系型数据库
+		*)对象数据库
+		*)键值数据库
+***********************************************
+	*创建数据库
+		create database db1 charset utf8； 常见数据库，设置编码
+	*数据库保存目录
+		Linux：
+			ls /var/lib/mysql
+		windows:
+			MySQL安装目录 \data
+	*查看数据库的库配置文件
+		配置两项内容：
+			*)数据库使用的默认字符编码
+			*)字符的排列方式
+		linux：
+			cat /var/lib/mysql/db1/db.opt
+		windows:
+			把文件拖拽到记事本
+===============================
+字符编码：
+	asc ii
+		0-127
+	iso-8859-1 
+		latin-1
+		160-255   11111111
+	双字节编码
+	GBK		国标码，中国附近的
+	Unicode	统一码 全球文字，100万以上
+		双字节常用字符 65535
+	utf-8	
+		英文单字节
+		中文三字节
+	（百度gbk，google utf8,默认latin-1）
+字符排列方式：
+	MySQL独有，其他数据库没有,有很多排列方式
+	collation	排列，校对，字符排序
+	show collation;
+	show collation like 'gbk%';过滤(%是通意符)
+	show collation like 'utf8\_%';(_通意符，代表一个字符。\转义符)
+	常用：
+		gbk_chinese_ci
+		utf8_general_ci
+			(ci代表不区分大小写)
+======================================
+	*修改数据库（编码设置）
+		修改编码
+		alter database db1 charset gbk;
+		修改排序(不常用)
+		alter database db1 collate gbk_bin;
+
+********************************************************************
+	*创建数据表
+		column/field 列，字段
+
+		use db1;
+		-- 用户表（--注释）
+		create table user(
+			id int,
+			name varchar(16),(var可变的char字符串)
+			age int
+		)engine=innodb charset=gbk;//(engine引擎有两种选择innodb或者myisam)
+		show tables;
+		desc user;//(describe描述，显示表信息)
+	*数据库目录中的表文件
+		Linux：
+			ls -al /var/lib/mysql/db1
+		windows:
+			找到 data\db1目录
+
+		user.frm		--表结构文件
+		user.myd		--数据储存文件
+		user.myi		--索引文件
+	*存储引擎
+		MySQL使用的搜索引擎
+			*）innodb
+				*)支持数据库中高级功能
+					*)事务
+					*)外键（外键必须是其他表的主键）
+			*）myisam
+				*)数据存储基本功能
+				*)效率非常高
+				*)一般用这个
+	*)在表中插入数据
+		insert into user values(1, 'zhangsan', 25);
+		insert into user(id,age,name) values(1, 35, 'zhan'); 
+					
+		
+	
+	
+		

@@ -1,0 +1,8 @@
+连接远程桌面：
+	*）win + r
+	*)mstsc
+	*)输入ip
+	*)显示选项
+	*)用户名：administrator
+	*)链接
+	

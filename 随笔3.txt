@@ -1,0 +1,6 @@
+Azure 微软云服务
+nc nv带显卡的VM虚拟机
+带s就是ssd高级存储硬盘
+storage ？
+table（存储表） 是NoSql存储
+blob存储 ，app 和 web 访问都可以放在上面。他是无限级存储。

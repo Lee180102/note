@@ -1,0 +1,47 @@
+*) scrollable: true			添加右侧活动条。
+*) allowBlank: false 		设置不可为空，否则爆红。
+*) alwaysOnTop: true 		设置窗口在随上层。
+*) multiSelect :true 		设置下拉框可多选。
+*) maxLength: 32,			设置文本最长度。
+*) emptyText: '提示内容' 	输入框内添加提示内容
+*) Vtypes :
+	email : 邮箱验证
+*) 格式验证：
+	
+	手机号：
+		maskRe: /[\d\-]/, 
+		regex: /^\d{11}$/,
+		regexText: 'Must be in the format xxx-xxx-xxxx'
+	邮编：
+		maskRe: /[\d\-]/,
+        regex: /^\d{5}(\-\d{4})?$/,	
+        regexText: 'Must be in the format xxxxx or xxxxx-xxxx',
+
+              
+	
+
+
+
+
+
+
+*) 图片相关
+		包含点击图片，新窗口弹出图片：特例出库功能点。
+*) 业务相关
+		动态给页面添加属性。用lookup找到元素。setConfig（“xxx”， xxx）；
+*) 时间前后验证：
+	*********************************************************************************
+	if (record.data.statEnd.getTime()- record.data.statStart.getTime() < 0) {		
+            Amili.amili.FlyTip.fly('警告', '开始日期大于结束日期。', 'warning');	
+            return;																
+        }																			
+	*********************************************************************************
+*)textfiled后面添加单位：
+	*********************************************************************************
+	 {																				
+	    flex: 0.1,																	
+        xtype: 'tbtext',															
+        margin: '3 0 0 0',															
+       text: '元'																	
+	}																				
+	*********************************************************************************
